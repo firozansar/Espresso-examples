@@ -15,9 +15,6 @@ public class HierarchyActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().add(R.id.container, HierarchyFragment.newInstance()).commit();
 		}
