@@ -12,9 +12,6 @@ import info.firozansari.espressoexamples.R;
 import info.firozansari.espressoexamples.TextSwapper;
 
 
-/**
- * Created by jordan_terry on 03/02/2015.
- */
 public class TestFragment extends Fragment {
 
     private TextView mExampleText;

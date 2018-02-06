@@ -9,9 +9,6 @@ import android.view.ViewGroup;
 import info.firozansari.espressoexamples.R;
 
 
-/**
- * Created by jordan_terry on 03/02/2015.
- */
 public class PositionFragment extends Fragment {
 
     public static PositionFragment newInstance() {

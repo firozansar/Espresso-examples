@@ -6,9 +6,6 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 import info.firozansari.espressoexamples.fragments.PagerFragment;
 
 
-/**
- * Created by jordan_terry on 05/02/2015.
- */
 public class PagerAdapter extends FragmentStatePagerAdapter {
     public String[] mStrings;
 

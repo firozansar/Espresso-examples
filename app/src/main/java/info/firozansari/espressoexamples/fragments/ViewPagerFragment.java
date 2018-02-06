@@ -11,9 +11,6 @@ import info.firozansari.espressoexamples.R;
 import info.firozansari.espressoexamples.adapters.PagerAdapter;
 
 
-/**
- * Created by jordan_terry on 03/02/2015.
- */
 public class ViewPagerFragment extends Fragment {
     public static String TAG = ViewPagerFragment.class.getSimpleName();
 

@@ -8,10 +8,6 @@ import android.view.ViewGroup;
 
 import info.firozansari.espressoexamples.R;
 
-
-/**
- * Created by jordan_terry on 03/02/2015.
- */
 public class HierarchyFragment extends Fragment {
 
     public static HierarchyFragment newInstance() {

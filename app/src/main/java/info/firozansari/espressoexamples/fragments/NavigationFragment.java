@@ -10,9 +10,6 @@ import android.widget.TextView;
 import info.firozansari.espressoexamples.R;
 
 
-/**
- * Created by jordan_terry on 03/02/2015.
- */
 public class NavigationFragment extends Fragment {
     public static String TAG = NavigationFragment.class.getSimpleName();
 

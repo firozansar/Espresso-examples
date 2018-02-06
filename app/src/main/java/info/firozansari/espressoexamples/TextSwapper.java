@@ -1,7 +1,7 @@
 package info.firozansari.espressoexamples;
 
 /**
- * Created by jordan_terry on 03/02/2015.
+ * Created by Firoz.
  */
 public class TextSwapper {
     private String mBeforeText, mAfterText, mCurrentText;

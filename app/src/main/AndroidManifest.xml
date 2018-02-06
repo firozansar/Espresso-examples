@@ -13,6 +13,11 @@
         <activity
             android:name="info.firozansari.espressoexamples.activities.MainActivity"
             android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name="info.firozansari.espressoexamples.activities.SwitchActivity"
@@ -29,11 +34,6 @@
         <activity
             android:name="info.firozansari.espressoexamples.activities.ViewPagerActivity"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name="info.firozansari.espressoexamples.activities.HierarchyActivity"
