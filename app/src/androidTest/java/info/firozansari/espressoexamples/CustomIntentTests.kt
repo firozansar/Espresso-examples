@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import info.firozansari.espressoexamples.activities.CustomIntentActivity
@@ -21,15 +22,13 @@ class CustomIntentTests {
 
     @Rule
     @JvmField
-    var rule = ActivityTestRule(CustomIntentActivity::class.java,
-            true,  // initialTouchMode
-            false) // launchActivity - false so we could customize the intent
+    var activityRule = ActivityScenarioRule(CustomIntentActivity::class.java)
 
     @Before
     fun setup() {
-        val intent = Intent()
-        intent.putExtra(CustomIntentActivity.CUSTOM_TEXT, MY_CUSTOM_TEXT)
-        rule.launchActivity(intent)
+        activityRule.scenario.onActivity { activity ->
+            activity.startActivity(activity, MY_CUSTOM_TEXT)
+        }
     }
 
     // onView() entry point to the view

@@ -1,9 +1,11 @@
 package info.firozansari.espressoexamples
 
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.assertion.PositionAssertions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import info.firozansari.espressoexamples.activities.PositionActivity
@@ -17,14 +19,15 @@ import org.junit.runner.RunWith
 class PositionActivityTests {
     /** Launches [PositionActivity] for every test  */
     @Rule
-    var activityRule = ActivityTestRule(PositionActivity::class.java)
+    @JvmField
+    var activityRule = ActivityScenarioRule(PositionActivity::class.java)
 
     /**
      * Is this to the left of another view.
      */
     @Test
     fun testRightOf() {
-        Espresso.onView(ViewMatchers.withId(R.id.right_text)).check(PositionAssertions.isRightOf(ViewMatchers.withId(R.id.left_text)))
+        onView(ViewMatchers.withId(R.id.right_text)).check(PositionAssertions.isRightOf(ViewMatchers.withId(R.id.left_text)))
     }
 
     /**
@@ -32,7 +35,7 @@ class PositionActivityTests {
      */
     @Test
     fun testLeftOf() {
-        Espresso.onView(ViewMatchers.withId(R.id.left_text)).check(PositionAssertions.isLeftOf(ViewMatchers.withId(R.id.right_text)))
+        onView(ViewMatchers.withId(R.id.left_text)).check(PositionAssertions.isLeftOf(ViewMatchers.withId(R.id.right_text)))
     }
 
     /**
@@ -40,7 +43,7 @@ class PositionActivityTests {
      */
     @Test
     fun testBelow() {
-        Espresso.onView(ViewMatchers.withId(R.id.bottom_text)).check(PositionAssertions.isBelow(ViewMatchers.withId(R.id.right_text)))
+        onView(ViewMatchers.withId(R.id.bottom_text)).check(PositionAssertions.isBelow(ViewMatchers.withId(R.id.right_text)))
     }
 
     /**
@@ -48,7 +51,7 @@ class PositionActivityTests {
      */
     @Test
     fun testAbove() {
-        Espresso.onView(ViewMatchers.withId(R.id.top_text)).check(PositionAssertions.isAbove(ViewMatchers.withId(R.id.right_text)))
+        onView(ViewMatchers.withId(R.id.top_text)).check(PositionAssertions.isAbove(ViewMatchers.withId(R.id.right_text)))
     }
 
     /**
@@ -56,7 +59,7 @@ class PositionActivityTests {
      */
     @Test
     fun testAlignedTopOfView() {
-        Espresso.onView(ViewMatchers.withId(R.id.top_text)).check(PositionAssertions.isTopAlignedWith(ViewMatchers.withId(R.id.parent_container)))
+        onView(ViewMatchers.withId(R.id.top_text)).check(PositionAssertions.isTopAlignedWith(ViewMatchers.withId(R.id.parent_container)))
     }
 
     /**
@@ -65,7 +68,7 @@ class PositionActivityTests {
      */
     @Test
     fun testAlignedLeftOfView() {
-        Espresso.onView(ViewMatchers.withId(R.id.top_text)).check(PositionAssertions.isLeftAlignedWith(ViewMatchers.withId(R.id.parent_container)))
+        onView(ViewMatchers.withId(R.id.top_text)).check(PositionAssertions.isLeftAlignedWith(ViewMatchers.withId(R.id.parent_container)))
     }
 
     /**
@@ -74,7 +77,7 @@ class PositionActivityTests {
      */
     @Test
     fun testAlignedRightOfView() {
-        Espresso.onView(ViewMatchers.withId(R.id.bottom_text)).check(PositionAssertions.isRightAlignedWith(ViewMatchers.withId(R.id.parent_container)))
+        onView(ViewMatchers.withId(R.id.bottom_text)).check(PositionAssertions.isRightAlignedWith(ViewMatchers.withId(R.id.parent_container)))
     }
 
     /**
@@ -82,13 +85,13 @@ class PositionActivityTests {
      */
     @Test
     fun testAlignedBottomOfView() {
-        Espresso.onView(ViewMatchers.withId(R.id.bottom_text)).check(PositionAssertions.isBottomAlignedWith(ViewMatchers.withId(R.id.parent_container)))
+        onView(ViewMatchers.withId(R.id.bottom_text)).check(PositionAssertions.isBottomAlignedWith(ViewMatchers.withId(R.id.parent_container)))
     }
 
     /**
      * check if an element was not found in view hierarchy
      */
     fun testElementDoesNotExists() {
-        Espresso.onView(ViewMatchers.withId(R.id.navigation_fragment_text)).check(ViewAssertions.doesNotExist())
+        onView(ViewMatchers.withId(R.id.navigation_fragment_text)).check(ViewAssertions.doesNotExist())
     }
 }

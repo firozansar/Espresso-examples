@@ -1,11 +1,11 @@
 package info.firozansari.espressoexamples
 
-import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import info.firozansari.espressoexamples.activities.MainActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
@@ -17,15 +17,16 @@ import org.junit.runner.RunWith
 class MainActivityTests {
     /** Launches [MainActivity] for every test  */
     @Rule
-    var activityRule = ActivityTestRule(MainActivity::class.java)
+    @JvmField
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     /**
      * Checks whether text on TextView gets changed after a button click
      */
     @Test
     fun testSwapText() {
-        Espresso.onView(ViewMatchers.withId(R.id.change_text_button)).perform(ViewActions.click())
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_example_text), ViewMatchers.withText(R.string.example_text_after))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.change_text_button)).perform(ViewActions.click())
+        onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_example_text), ViewMatchers.withText(R.string.example_text_after))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -33,7 +34,7 @@ class MainActivityTests {
      */
     @Test
     fun testIsEnabled() {
-        Espresso.onView(ViewMatchers.withId(R.id.change_text_button)).check(ViewAssertions.matches(ViewMatchers.isEnabled()))
+        onView(ViewMatchers.withId(R.id.change_text_button)).check(ViewAssertions.matches(ViewMatchers.isEnabled()))
     }
 
     /**
@@ -41,7 +42,7 @@ class MainActivityTests {
      */
     @Test
     fun testCheckingACheckBox() {
-        Espresso.onView(ViewMatchers.withId(R.id.enabled_checkbox)).check(ViewAssertions.matches(ViewMatchers.isNotChecked())).perform(ViewActions.click()).check(ViewAssertions.matches(ViewMatchers.isChecked()))
+        onView(ViewMatchers.withId(R.id.enabled_checkbox)).check(ViewAssertions.matches(ViewMatchers.isNotChecked())).perform(ViewActions.click()).check(ViewAssertions.matches(ViewMatchers.isChecked()))
     }
 
     /**
@@ -58,7 +59,7 @@ class MainActivityTests {
      */
     @Test
     fun testIsCheckboxDisabled() {
-        Espresso.onView(ViewMatchers.withId(R.id.disabled_checkbox)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isEnabled())))
+        onView(ViewMatchers.withId(R.id.disabled_checkbox)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isEnabled())))
     }
 
     /**
@@ -66,7 +67,7 @@ class MainActivityTests {
      */
     @Test
     fun testIsClickable() {
-        Espresso.onView(ViewMatchers.withId(R.id.change_text_button)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
+        onView(ViewMatchers.withId(R.id.change_text_button)).check(ViewAssertions.matches(ViewMatchers.isClickable()))
     }
 
     /**
@@ -74,8 +75,8 @@ class MainActivityTests {
      */
     @Test
     fun testActionMenuItemClick() {
-        Espresso.openContextualActionModeOverflowMenu()
-        Espresso.onView(ViewMatchers.withText(R.string.action_settings)).perform(ViewActions.click())
+        openContextualActionModeOverflowMenu()
+        onView(ViewMatchers.withText(R.string.action_settings)).perform(ViewActions.click())
     }
 
     /**
@@ -83,7 +84,7 @@ class MainActivityTests {
      */
     @Test
     fun testEditTextIsFocusable() {
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).check(ViewAssertions.matches(ViewMatchers.isFocusable()))
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).check(ViewAssertions.matches(ViewMatchers.isFocusable()))
     }
 
     /**
@@ -92,9 +93,9 @@ class MainActivityTests {
     @Test
     fun testTypeText() {
         val exampleText = "Here is a long piece of text to type out."
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.typeText(exampleText))
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.typeText(exampleText))
         // Example confirming this text has been successfully typed with just the text.
-        Espresso.onView(ViewMatchers.withText(exampleText)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withText(exampleText)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -103,12 +104,12 @@ class MainActivityTests {
     @Test
     fun testTypeTextThenClear() {
         val exampleText = "Here is a long piece of text to type out."
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.typeText(exampleText))
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.typeText(exampleText))
         // Example confirming this text has been successfully typed with just the text.
-        Espresso.onView(ViewMatchers.withText(exampleText)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.clearText())
+        onView(ViewMatchers.withText(exampleText)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.clearText())
         // Check it is empty
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).check(ViewAssertions.matches(ViewMatchers.withText("")))
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).check(ViewAssertions.matches(ViewMatchers.withText("")))
     }
 
     /**
@@ -118,12 +119,12 @@ class MainActivityTests {
     fun testTypeTextThenReplace() {
         val exampleText = "Here is a long piece of text to type out."
         val exampleReplaceText = "Here is a long piece of text to replace."
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.typeText(exampleText))
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.typeText(exampleText))
         // Example confirming this text has been successfully typed with just the text.
-        Espresso.onView(ViewMatchers.withText(exampleText)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.replaceText(exampleReplaceText))
+        onView(ViewMatchers.withText(exampleText)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.replaceText(exampleReplaceText))
         // Check it is empty
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_edittext), ViewMatchers.withText(exampleReplaceText))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_edittext), ViewMatchers.withText(exampleReplaceText))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -132,9 +133,9 @@ class MainActivityTests {
     @Test
     fun testTypeTextWithTextAndId() {
         val exampleText = "Here is a long piece of text to type out."
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.typeText(exampleText))
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.typeText(exampleText))
         // Example confirming this text has been successfully typed with just the text.
-        Espresso.onView(Matchers.allOf(ViewMatchers.withText(exampleText), ViewMatchers.withId(R.id.test_fragment_edittext))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(Matchers.allOf(ViewMatchers.withText(exampleText), ViewMatchers.withId(R.id.test_fragment_edittext))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -142,8 +143,8 @@ class MainActivityTests {
      */
     @Test
     fun testTypeTextCloseSoftKeyboard() {
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.click())
-        Espresso.closeSoftKeyboard()
+        onView(ViewMatchers.withId(R.id.test_fragment_edittext)).perform(ViewActions.click())
+        closeSoftKeyboard()
     }
 
     /**
@@ -151,9 +152,11 @@ class MainActivityTests {
      */
     @Test
     fun testContentDescription() {
-        val exampleContentDescription = activityRule.activity.getString(R.string.example_content_description)
-        Espresso.onView(ViewMatchers.withId(R.id.test_fragment_content_description_text)).check(ViewAssertions.matches(ViewMatchers.hasContentDescription()))
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_content_description_text), ViewMatchers.withContentDescription(exampleContentDescription))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        activityRule.scenario.onActivity { activity ->
+            val exampleContentDescription = activity.getString(R.string.example_content_description)
+            onView(ViewMatchers.withId(R.id.test_fragment_content_description_text)).check(ViewAssertions.matches(ViewMatchers.hasContentDescription()))
+            onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_content_description_text), ViewMatchers.withContentDescription(exampleContentDescription))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        }
     }
 
     /**
@@ -161,8 +164,10 @@ class MainActivityTests {
      */
     @Test
     fun testStartsWith() {
-        val textStartsWith = activityRule.activity.getString(R.string.example_content_description).substring(0, 5)
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_content_description_text), ViewMatchers.withText(CoreMatchers.startsWith(textStartsWith)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        activityRule.scenario.onActivity { activity ->
+            val textStartsWith = activity.getString(R.string.example_content_description).substring(0, 5)
+            onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_content_description_text), ViewMatchers.withText(CoreMatchers.startsWith(textStartsWith)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        }
     }
 
     /**
@@ -170,9 +175,11 @@ class MainActivityTests {
      */
     @Test
     fun testEndsWith() {
-        var textEndsWith = activityRule.activity.getString(R.string.example_content_description)
-        textEndsWith = textEndsWith.substring(textEndsWith.length - 4)
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_content_description_text), ViewMatchers.withText(Matchers.endsWith(textEndsWith)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        activityRule.scenario.onActivity { activity ->
+            var textEndsWith = activity.getString(R.string.example_content_description)
+            textEndsWith = textEndsWith.substring(textEndsWith.length - 4)
+            onView(Matchers.allOf(ViewMatchers.withId(R.id.test_fragment_content_description_text), ViewMatchers.withText(Matchers.endsWith(textEndsWith)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        }
     }
 
     /**
@@ -180,7 +187,7 @@ class MainActivityTests {
      */
     @Test
     fun testScrollToButton() {
-        Espresso.onView(ViewMatchers.withId(R.id.offscreen_button)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed()))).perform(ViewActions.scrollTo()).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.offscreen_button)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed()))).perform(ViewActions.scrollTo()).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -188,7 +195,7 @@ class MainActivityTests {
      */
     @Test
     fun testScrollDown() {
-        Espresso.onView(ViewMatchers.withId(R.id.scroll_view)).perform(ViewActions.swipeUp() /* Got to swipe up to scroll down. */)
+        onView(ViewMatchers.withId(R.id.scroll_view)).perform(ViewActions.swipeUp() /* Got to swipe up to scroll down. */)
     }
 
     /**
@@ -196,7 +203,7 @@ class MainActivityTests {
      */
     @Test
     fun testScrollUp() {
-        Espresso.onView(ViewMatchers.withId(R.id.scroll_view)).perform(ViewActions.swipeDown() /* Got to swipe down to scroll up. */)
+        onView(ViewMatchers.withId(R.id.scroll_view)).perform(ViewActions.swipeDown() /* Got to swipe down to scroll up. */)
     }
 
     /**
@@ -204,6 +211,6 @@ class MainActivityTests {
      */
     @Test
     fun testSelectWithHint() {
-        Espresso.onView(ViewMatchers.withHint(R.string.example_text_hint)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withHint(R.string.example_text_hint)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }

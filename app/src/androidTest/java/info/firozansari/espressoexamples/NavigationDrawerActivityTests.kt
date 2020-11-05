@@ -1,10 +1,13 @@
 package info.firozansari.espressoexamples
 
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.DrawerActions
+import androidx.test.espresso.contrib.DrawerActions.openDrawer
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import info.firozansari.espressoexamples.activities.NavigationDrawerActivity
@@ -18,7 +21,8 @@ import org.junit.runner.RunWith
 class NavigationDrawerActivityTests {
     /** Launches [NavigationDrawerActivity] for every test  */
     @Rule
-    var activityRule = ActivityTestRule(NavigationDrawerActivity::class.java)
+    @JvmField
+    var activityRule = ActivityScenarioRule(NavigationDrawerActivity::class.java)
 
     /**
      * Test that clicking on a Navigation Drawer Item will open the correct fragment.
@@ -26,9 +30,9 @@ class NavigationDrawerActivityTests {
      */
     @Test
     fun testNavigationDrawerItemClick() {
-        DrawerActions.openDrawer(R.id.my_drawer_layout)
-        Espresso.onView(ViewMatchers.withText("Menu One")).perform(ViewActions.click())
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.navigation_fragment_text), ViewMatchers.withText("Menu One"))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        openDrawer(R.id.my_drawer_layout)
+        onView(ViewMatchers.withText("Menu One")).perform(ViewActions.click())
+        onView(Matchers.allOf(ViewMatchers.withId(R.id.navigation_fragment_text), ViewMatchers.withText("Menu One"))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -37,7 +41,7 @@ class NavigationDrawerActivityTests {
      */
     @Test
     fun testNavigationDrawerBackButton() {
-        DrawerActions.openDrawer(R.id.my_drawer_layout)
-        Espresso.pressBack()
+        openDrawer(R.id.my_drawer_layout)
+        pressBack()
     }
 }

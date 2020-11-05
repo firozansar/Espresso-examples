@@ -18,18 +18,19 @@ class CustomIntentActivity : AppCompatActivity() {
         setTextView()
     }
 
+    fun startActivity(originActivity: Activity, text: String) {
+        val intent = Intent(originActivity, CustomIntentActivity::class.java)
+        intent.putExtra(CUSTOM_TEXT, text)
+        originActivity.startActivity(intent)
+    }
+
     private fun setTextView() {
-        val text = intent.extras!!.getString(CUSTOM_TEXT)
+        val text = intent.extras?.getString(CUSTOM_TEXT)
         val textView = findViewById<View>(R.id.custom_intent_textview) as TextView
         textView.text = text
     }
 
     companion object {
         const val CUSTOM_TEXT = "CUSTOM_TEXT"
-        fun startActivity(originActivity: Activity, text: String?) {
-            val intent = Intent(originActivity, CustomIntentActivity::class.java)
-            intent.putExtra(CUSTOM_TEXT, text)
-            originActivity.startActivity(intent)
-        }
     }
 }

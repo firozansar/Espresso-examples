@@ -1,9 +1,11 @@
 package info.firozansari.espressoexamples
 
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import info.firozansari.espressoexamples.activities.SwitchActivity
@@ -17,7 +19,8 @@ import org.junit.runner.RunWith
 class SwitchActivityTests {
     /** Launches [SwitchActivity] for every test  */
     @Rule
-    var activityRule = ActivityTestRule(SwitchActivity::class.java)
+    @JvmField
+    var activityRule = ActivityScenarioRule(SwitchActivity::class.java)
 
     /**
      * Click a switch using its ID.
@@ -25,9 +28,9 @@ class SwitchActivityTests {
      */
     @Test
     fun testSwitchWithId() {
-        Espresso.onView(ViewMatchers.withId(R.id.example_switch)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isChecked())))
-        Espresso.onView(ViewMatchers.withId(R.id.example_switch)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.example_switch)).check(ViewAssertions.matches(ViewMatchers.isChecked()))
+        onView(ViewMatchers.withId(R.id.example_switch)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isChecked())))
+        onView(ViewMatchers.withId(R.id.example_switch)).perform(ViewActions.click())
+        onView(ViewMatchers.withId(R.id.example_switch)).check(ViewAssertions.matches(ViewMatchers.isChecked()))
     }
 
     /**
@@ -36,9 +39,9 @@ class SwitchActivityTests {
      */
     @Test
     fun testSwitchWithText() {
-        Espresso.onView(ViewMatchers.withText(R.string.example_switch_label)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isChecked())))
-        Espresso.onView(ViewMatchers.withText(R.string.example_switch_label)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withText(R.string.example_switch_label)).check(ViewAssertions.matches(ViewMatchers.isChecked()))
+        onView(ViewMatchers.withText(R.string.example_switch_label)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isChecked())))
+        onView(ViewMatchers.withText(R.string.example_switch_label)).perform(ViewActions.click())
+        onView(ViewMatchers.withText(R.string.example_switch_label)).check(ViewAssertions.matches(ViewMatchers.isChecked()))
     }
 
     /**
@@ -49,7 +52,7 @@ class SwitchActivityTests {
     @Test
     fun testSwitchWithChainingExample() {
         // Start with a ViewInteraction
-        Espresso.onView(ViewMatchers.withText(R.string.example_switch_label)) // Chain the methods you want to call.
+        onView(ViewMatchers.withText(R.string.example_switch_label)) // Chain the methods you want to call.
                 .check(ViewAssertions.matches(Matchers.not(ViewMatchers.isChecked())))
                 .perform(ViewActions.click())
                 .check(ViewAssertions.matches(ViewMatchers.isChecked()))

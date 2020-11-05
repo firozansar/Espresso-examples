@@ -8,6 +8,7 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.LayoutAssertions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import info.firozansari.espressoexamples.activities.HierarchyActivity
@@ -24,15 +25,8 @@ import org.junit.runner.RunWith
 class HierarchyActivityTests {
     /** Launches [HierarchyActivity] for every test  */
     @Rule
-    var activityRule = ActivityTestRule(HierarchyActivity::class.java)
-
-    /**
-     * Test the descendants of a selected view.
-     */
-    @Test
-    fun testSelectedDescendants() {
-        ViewAssertions.selectedDescendantsMatch(ViewMatchers.isAssignableFrom(TextView::class.java), ViewMatchers.withText(activityRule.activity.getString(R.string.hierarchy_text))).check(createATestView(), null)
-    }
+    @JvmField
+    var activityRule = ActivityScenarioRule(HierarchyActivity::class.java)
 
     /**
      * Test that there are no ellipsized texts in entire view hierarchy.
@@ -63,8 +57,10 @@ class HierarchyActivityTests {
      */
     @Test
     fun testWithParent() {
-        val contentDescription = activityRule.activity.getString(R.string.hierarchy_text)
-        Espresso.onView(Matchers.allOf(ViewMatchers.withContentDescription(contentDescription), ViewMatchers.withParent(ViewMatchers.withId(R.id.hierarchy_parent_two)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        activityRule.scenario.onActivity { activity ->
+            val contentDescription = activity.getString(R.string.hierarchy_text)
+            Espresso.onView(Matchers.allOf(ViewMatchers.withContentDescription(contentDescription), ViewMatchers.withParent(ViewMatchers.withId(R.id.hierarchy_parent_two)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        }
     }
 
     /**
@@ -99,12 +95,4 @@ class HierarchyActivityTests {
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_text_three), ViewMatchers.hasSibling(ViewMatchers.withId(R.id.hierarchy_text_four)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
-    // https://code.google.com/p/android-test-kit/source/browse/espresso/libtests/src/main/java/com/google/android/apps/common/testing/ui/espresso/assertion/ViewAssertionsTest.java?r=9f9565f2c40130574b80bc67845120a72a66a517
-    fun createATestView(): View {
-        val parent: ViewGroup = RelativeLayout(activityRule.activity)
-        val tv = TextView(activityRule.activity)
-        tv.text = activityRule.activity.getString(R.string.hierarchy_text)
-        parent.addView(tv)
-        return parent
-    }
 }
