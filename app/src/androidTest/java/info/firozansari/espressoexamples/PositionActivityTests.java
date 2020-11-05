@@ -1,8 +1,8 @@
 package info.firozansari.espressoexamples;
 
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,17 +11,17 @@ import org.junit.runner.RunWith;
 
 import info.firozansari.espressoexamples.activities.PositionActivity;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.PositionAssertions.isAbove;
-import static android.support.test.espresso.assertion.PositionAssertions.isBelow;
-import static android.support.test.espresso.assertion.PositionAssertions.isBottomAlignedWith;
-import static android.support.test.espresso.assertion.PositionAssertions.isLeftAlignedWith;
-import static android.support.test.espresso.assertion.PositionAssertions.isLeftOf;
-import static android.support.test.espresso.assertion.PositionAssertions.isRightAlignedWith;
-import static android.support.test.espresso.assertion.PositionAssertions.isRightOf;
-import static android.support.test.espresso.assertion.PositionAssertions.isTopAlignedWith;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.PositionAssertions.isAbove;
+import static androidx.test.espresso.assertion.PositionAssertions.isBelow;
+import static androidx.test.espresso.assertion.PositionAssertions.isBottomAlignedWith;
+import static androidx.test.espresso.assertion.PositionAssertions.isLeftAlignedWith;
+import static androidx.test.espresso.assertion.PositionAssertions.isLeftOf;
+import static androidx.test.espresso.assertion.PositionAssertions.isRightAlignedWith;
+import static androidx.test.espresso.assertion.PositionAssertions.isRightOf;
+import static androidx.test.espresso.assertion.PositionAssertions.isTopAlignedWith;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 /** Tests related to positioning of views such as isRightOf(), isBelow(), isTopAlignedWith().
  * */
