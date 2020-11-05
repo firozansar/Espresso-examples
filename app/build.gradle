@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.0"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "info.firozansari.espressoexamples"
@@ -44,5 +45,10 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:3.3.0"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:2.2.0"
     androidTestImplementation "com.squareup.rx.idler:rx2-idler:0.11.0"
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
