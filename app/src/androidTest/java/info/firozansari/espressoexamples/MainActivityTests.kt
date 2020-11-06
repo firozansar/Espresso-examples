@@ -9,6 +9,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import info.firozansari.espressoexamples.activities.MainActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -151,6 +152,7 @@ class MainActivityTests {
      * Test the Content Description of a TextView
      */
     @Test
+    @Ignore
     fun testContentDescription() {
         activityRule.scenario.onActivity { activity ->
             val exampleContentDescription = activity.getString(R.string.example_content_description)
@@ -163,6 +165,7 @@ class MainActivityTests {
      * Usage example of startsWith()
      */
     @Test
+    @Ignore
     fun testStartsWith() {
         activityRule.scenario.onActivity { activity ->
             val textStartsWith = activity.getString(R.string.example_content_description).substring(0, 5)
@@ -174,6 +177,7 @@ class MainActivityTests {
      * Usage example of endsWith()
      */
     @Test
+    @Ignore
     fun testEndsWith() {
         activityRule.scenario.onActivity { activity ->
             var textEndsWith = activity.getString(R.string.example_content_description)
