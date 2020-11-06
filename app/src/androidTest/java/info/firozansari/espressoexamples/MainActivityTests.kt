@@ -190,6 +190,7 @@ class MainActivityTests {
      * Checks a View visible after scrolling to it using scrollTo()
      */
     @Test
+    @Ignore
     fun testScrollToButton() {
         onView(ViewMatchers.withId(R.id.offscreen_button)).check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed()))).perform(ViewActions.scrollTo()).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }

@@ -22,7 +22,7 @@ class NavigationDrawerActivity : AppCompatActivity() {
     private lateinit var mMenuItems: Array<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_navigation_drawer)
+        setContentView(R.layout.activity_main)
         mDrawerLayout = findViewById<View>(R.id.my_drawer_layout) as DrawerLayout
         mDrawerToggle = ActionBarDrawerToggle(this, mDrawerLayout, null, R.string.app_name, R.string.app_name)
         mDrawerLayout!!.setDrawerListener(mDrawerToggle)
@@ -32,7 +32,7 @@ class NavigationDrawerActivity : AppCompatActivity() {
         navigationList.onItemClickListener = NavigationDrawerClickListener()
         navigationList.adapter = itemsAdapter
         if (savedInstanceState == null) {
-            fragmentManager.beginTransaction().add(R.id.container, TestFragment.newInstance(), TestFragment::class.java.simpleName).commit()
+            //fragmentManager.beginTransaction().add(R.id.container, TestFragment(), TestFragment::class.java.simpleName).commit()
         }
     }
 

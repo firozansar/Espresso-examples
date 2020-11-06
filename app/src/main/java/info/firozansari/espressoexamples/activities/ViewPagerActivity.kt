@@ -10,7 +10,7 @@ class ViewPagerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            fragmentManager.beginTransaction().add(R.id.container, ViewPagerFragment.newInstance()).commit()
+            //fragmentManager.beginTransaction().add(R.id.container, ViewPagerFragment.newInstance()).commit()
         }
     }
 }
