@@ -10,9 +10,13 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement
 import androidx.test.rule.ActivityTestRule
-import info.firozansari.espressoexamples.activities.HierarchyActivity
+import info.firozansari.espressoexamples.activities.MainActivity
+import info.firozansari.espressoexamples.fragments.HierarchyFragment
+import info.firozansari.espressoexamples.fragments.SwitchFragment
 import org.hamcrest.Matchers
+import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -24,11 +28,19 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class HierarchyActivityTests {
-    /** Launches [HierarchyActivity] for every test  */
+
     @Rule
     @JvmField
-    var activityRule = ActivityScenarioRule(HierarchyActivity::class.java)
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
+    @Before
+    fun setup() {
+        activityRule.scenario.onActivity{ activity ->
+            UiThreadStatement.runOnUiThread {
+                activity.displayFragment(HierarchyFragment())
+            }
+        }
+    }
     /**
      * Test that there are no ellipsized texts in entire view hierarchy.
      */

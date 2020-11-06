@@ -7,20 +7,33 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement
 import androidx.test.rule.ActivityTestRule
-import info.firozansari.espressoexamples.activities.SwitchActivity
+import info.firozansari.espressoexamples.activities.MainActivity
+import info.firozansari.espressoexamples.fragments.SwitchFragment
+import info.firozansari.espressoexamples.fragments.ViewPagerFragment
 import org.hamcrest.Matchers
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /** Tests for [Switch] widget  */
 @RunWith(AndroidJUnit4::class)
-class SwitchActivityTests {
-    /** Launches [SwitchActivity] for every test  */
+class SwitchFragmentTests {
+
     @Rule
     @JvmField
-    var activityRule = ActivityScenarioRule(SwitchActivity::class.java)
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Before
+    fun setup() {
+        activityRule.scenario.onActivity{ activity ->
+            UiThreadStatement.runOnUiThread {
+                activity.displayFragment(SwitchFragment())
+            }
+        }
+    }
 
     /**
      * Click a switch using its ID.

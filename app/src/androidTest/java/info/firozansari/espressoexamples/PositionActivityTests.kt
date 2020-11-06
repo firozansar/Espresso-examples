@@ -1,14 +1,15 @@
 package info.firozansari.espressoexamples
 
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.Espresso.*
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.PositionAssertions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import info.firozansari.espressoexamples.activities.PositionActivity
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement
+import info.firozansari.espressoexamples.activities.MainActivity
+import info.firozansari.espressoexamples.fragments.PositionFragment
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,11 +18,18 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class PositionActivityTests {
-    /** Launches [PositionActivity] for every test  */
     @Rule
     @JvmField
-    var activityRule = ActivityScenarioRule(PositionActivity::class.java)
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
+    @Before
+    fun setup() {
+        activityRule.scenario.onActivity{ activity ->
+            UiThreadStatement.runOnUiThread {
+                activity.displayFragment(PositionFragment())
+            }
+        }
+    }
     /**
      * Is this to the left of another view.
      */

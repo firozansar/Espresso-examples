@@ -8,7 +8,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
 import info.firozansari.espressoexamples.activities.MainActivity
-import info.firozansari.espressoexamples.activities.ViewPagerActivity
 import info.firozansari.espressoexamples.fragments.ViewPagerFragment
 import org.hamcrest.Matchers
 import org.junit.Before
@@ -17,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ViewPagerActivityTests {
+class ViewPagerFragmentTests {
 
     @Rule
     @JvmField
