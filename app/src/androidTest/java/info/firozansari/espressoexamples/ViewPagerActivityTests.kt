@@ -6,18 +6,31 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
+import info.firozansari.espressoexamples.activities.MainActivity
 import info.firozansari.espressoexamples.activities.ViewPagerActivity
+import info.firozansari.espressoexamples.fragments.ViewPagerFragment
 import org.hamcrest.Matchers
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ViewPagerActivityTests {
-    /** Launches [ViewPagerActivity] for every test  */
+
     @Rule
     @JvmField
-    var activityRule = ActivityScenarioRule(ViewPagerActivity::class.java)
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Before
+    fun setup() {
+        activityRule.scenario.onActivity{ activity ->
+            runOnUiThread {
+                activity.displayFragment(ViewPagerFragment())
+            }
+        }
+    }
 
     /**
      * Swipe between the first and second pages in the ViewPager.
