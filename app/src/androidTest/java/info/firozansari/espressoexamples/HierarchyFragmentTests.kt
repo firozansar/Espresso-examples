@@ -1,20 +1,15 @@
 package info.firozansari.espressoexamples
 
-import android.view.View
-import android.view.ViewGroup
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.LayoutAssertions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.internal.runner.junit4.statement.UiThreadStatement
-import androidx.test.rule.ActivityTestRule
 import info.firozansari.espressoexamples.activities.MainActivity
 import info.firozansari.espressoexamples.fragments.HierarchyFragment
-import info.firozansari.espressoexamples.fragments.SwitchFragment
 import org.hamcrest.Matchers
 import org.junit.Before
 import org.junit.Ignore
@@ -27,7 +22,7 @@ import org.junit.runner.RunWith
  * [ViewMatchers.withParent], [ViewMatchers.withParent], [ViewMatchers.hasDescendant]
  */
 @RunWith(AndroidJUnit4::class)
-class HierarchyActivityTests {
+class HierarchyFragmentTests {
 
     @Rule
     @JvmField
@@ -46,7 +41,7 @@ class HierarchyActivityTests {
      */
     @Test
     fun testNoEllipsizedText() {
-        Espresso.onView(ViewMatchers.withId(R.id.hierarchy_parent)).check(LayoutAssertions.noEllipsizedText())
+        onView(ViewMatchers.withId(R.id.hierarchy_parent)).check(LayoutAssertions.noEllipsizedText())
     }
 
     /**
@@ -54,7 +49,7 @@ class HierarchyActivityTests {
      */
     @Test
     fun testNoMultilineButtons() {
-        Espresso.onView(ViewMatchers.withId(R.id.hierarchy_parent)).check(LayoutAssertions.noMultilineButtons())
+        onView(ViewMatchers.withId(R.id.hierarchy_parent)).check(LayoutAssertions.noMultilineButtons())
     }
 
     /**
@@ -62,7 +57,7 @@ class HierarchyActivityTests {
      */
     @Test
     fun testNoOverlap() {
-        Espresso.onView(ViewMatchers.withId(R.id.hierarchy_parent)).check(LayoutAssertions.noOverlaps())
+        onView(ViewMatchers.withId(R.id.hierarchy_parent)).check(LayoutAssertions.noOverlaps())
     }
 
     /**
@@ -73,7 +68,7 @@ class HierarchyActivityTests {
     fun testWithParent() {
         activityRule.scenario.onActivity { activity ->
             val contentDescription = activity.getString(R.string.hierarchy_text)
-            Espresso.onView(Matchers.allOf(ViewMatchers.withContentDescription(contentDescription), ViewMatchers.withParent(ViewMatchers.withId(R.id.hierarchy_parent_two)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            onView(Matchers.allOf(ViewMatchers.withContentDescription(contentDescription), ViewMatchers.withParent(ViewMatchers.withId(R.id.hierarchy_parent_two)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         }
     }
 
@@ -82,7 +77,7 @@ class HierarchyActivityTests {
      */
     @Test
     fun testWithChild() {
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_parent_two), ViewMatchers.withChild(ViewMatchers.withId(R.id.hierarchy_text_three)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_parent_two), ViewMatchers.withChild(ViewMatchers.withId(R.id.hierarchy_text_three)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -90,7 +85,7 @@ class HierarchyActivityTests {
      */
     @Test
     fun testHasDescendant() {
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_parent_two), ViewMatchers.hasDescendant(ViewMatchers.withId(R.id.hierarchy_text_three)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_parent_two), ViewMatchers.hasDescendant(ViewMatchers.withId(R.id.hierarchy_text_three)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -98,7 +93,7 @@ class HierarchyActivityTests {
      */
     @Test
     fun testIsDescendantOfA() {
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_text_three), ViewMatchers.isDescendantOfA(ViewMatchers.withId(R.id.hierarchy_parent_two)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_text_three), ViewMatchers.isDescendantOfA(ViewMatchers.withId(R.id.hierarchy_parent_two)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     /**
@@ -106,7 +101,7 @@ class HierarchyActivityTests {
      */
     @Test
     fun testHasSibling() {
-        Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_text_three), ViewMatchers.hasSibling(ViewMatchers.withId(R.id.hierarchy_text_four)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(Matchers.allOf(ViewMatchers.withId(R.id.hierarchy_text_three), ViewMatchers.hasSibling(ViewMatchers.withId(R.id.hierarchy_text_four)))).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
 }

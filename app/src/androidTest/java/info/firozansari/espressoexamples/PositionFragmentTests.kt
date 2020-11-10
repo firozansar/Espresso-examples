@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
 /** Tests related to positioning of views such as isRightOf(), isBelow(), isTopAlignedWith().
  */
 @RunWith(AndroidJUnit4::class)
-class PositionActivityTests {
+class PositionFragmentTests {
     @Rule
     @JvmField
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
